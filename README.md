@@ -1,4 +1,4 @@
-# nivupai.github.io
+# Nivedita Rethnakar
 
 Hello, This is Nivedita Rethnakar. Welecome aboard!
 Nivu's GitHub space
