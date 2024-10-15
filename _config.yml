@@ -37,7 +37,7 @@ author:
   orcid            : #"http://orcid.org/yourorcidurl"
   semantic         : # URL
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  researchgate     : # URL
+  researchgate     : "https://www.researchgate.net/profile/Nivedita-Rethnakar"
 
   # Repositories and software development
   bitbucket        : # Username - Update with your username on the site
@@ -45,7 +45,7 @@ author:
   dribbble         : # Username
   github           : "nivupai"
   kaggle           : # Username  
-  stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
+  StackOverflow    : "10210655/nivedita-rethnakar"  
 
   # Social media
   bluesky          : #"bsky.app" # Replace this with you Bluesky username
