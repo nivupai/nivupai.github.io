@@ -1,14 +1,14 @@
 # header
 main:
-  - title: "Publications"
-    url: /publications/
+  # - title: "Publications"
+  #   url: /publications/
 
+  - title: "Resume"
+    url: /resume/
+    
   - title: "Courses"
     url: /courses/    
     
-  - title: "Resume"
-    url: /resume/
-        
   - title: "Blog Posts"
     url: /year-archive/
     
