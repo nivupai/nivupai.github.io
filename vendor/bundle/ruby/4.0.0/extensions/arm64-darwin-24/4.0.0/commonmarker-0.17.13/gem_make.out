@@ -1,0 +1,95 @@
+current directory: /Users/nivupai/nivupai.github.io/vendor/bundle/ruby/4.0.0/gems/commonmarker-0.17.13/ext/commonmarker
+/opt/homebrew/opt/ruby/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/nivupai/nivupai.github.io/vendor/bundle/ruby/4.0.0/gems/commonmarker-0.17.13/ext/commonmarker
+make -j11 DESTDIR\= sitearchdir\=./.gem.20260311-59559-612yz sitelibdir\=./.gem.20260311-59559-612yz clean
+
+current directory: /Users/nivupai/nivupai.github.io/vendor/bundle/ruby/4.0.0/gems/commonmarker-0.17.13/ext/commonmarker
+make -j11 DESTDIR\= sitearchdir\=./.gem.20260311-59559-612yz sitelibdir\=./.gem.20260311-59559-612yz
+compiling arena.c
+compiling autolink.c
+compiling blocks.c
+compiling buffer.c
+compiling cmark.c
+compiling cmark_ctype.c
+compiling commonmark.c
+compiling commonmarker.c
+compiling core-extensions.c
+compiling ext_scanners.c
+compiling footnotes.c
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+arena.c:1:10: fatal error: 'stdlib.h' file not found
+#include <stdlib.h>
+         ^~~~~~~~~~
+In file included from autolink.c:1:
+In file included from ./autolink.h:4:
+In file included from ./cmark-gfm-core-extensions.h:8:
+In file included from ./cmark-gfm-extension_api.h:8:
+./cmark-gfm.h:4:10: fatal error: 'stdio.h' file not found
+#include <stdio.h>
+         ^~~~~~~~~
+1 warning and 1 error generated.
+make: *** [arena.o] Error 1
+make: *** Waiting for unfinished jobs....
+1 warning and 1 error generated.
+make: *** [autolink.o] Error 1
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+cmark.c:1:10: fatal error: 'stdlib.h' file not found
+#include <stdlib.h>
+         ^~~~~~~~~~
+buffer.c:2:10: fatal error: 'string.h' file not found
+#include <string.h>
+         ^~~~~~~~~~
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+1 warning and 1 error generated.
+1 warning and 1 error generated.
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+make: *** [buffer.o] Error 1
+blocks.c:8:10: fatal error: 'stdlib.h' file not found
+#include <stdlib.h>
+         ^~~~~~~~~~
+make: *** [cmark.o] Error 1
+ext_scanners.c:2:10: fatal error: 'stdlib.h' file not found
+#include <stdlib.h>
+         ^~~~~~~~~~
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+In file included from core-extensions.c:1:
+In file included from ./cmark-gfm-core-extensions.h:8:
+In file included from ./cmark-gfm-extension_api.h:8:
+./cmark-gfm.h:4:10: fatal error: 'stdio.h' file not found
+#include <stdio.h>
+         ^~~~~~~~~
+In file included from footnotes.c:1:
+./cmark-gfm.h:4:10: fatal error: 'stdio.h' file not found
+#include <stdio.h>
+         ^~~~~~~~~
+1 warning and 1 error generated.
+In file included from commonmarker.c:1:
+In file included from ./commonmarker.h:8:
+./cmark-gfm.h:4:10: fatal error: 'stdio.h' file not found
+#include <stdio.h>
+         ^~~~~~~~~
+make: *** [ext_scanners.o] Error 1
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+1 warning and 1 error generated.
+1 warning and 1 error generated.
+make: *** [core-extensions.o] Error 1
+make: *** [blocks.o] Error 1
+1 warning and 1 error generated.
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+make: *** [footnotes.o] Error 1
+commonmark.c:1:10: fatal error: 'stdlib.h' file not found
+#include <stdlib.h>
+         ^~~~~~~~~~
+1 warning and 1 error generated.
+make: *** [commonmark.o] Error 1
+1 warning generated.
+1 warning and 1 error generated.
+make: *** [commonmarker.o] Error 1
+
+make failed, exit code 2

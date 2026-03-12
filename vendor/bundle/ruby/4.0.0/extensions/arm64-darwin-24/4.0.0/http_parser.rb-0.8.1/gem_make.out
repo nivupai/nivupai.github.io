@@ -1,0 +1,29 @@
+current directory: /Users/nivupai/nivupai.github.io/vendor/bundle/ruby/4.0.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+/opt/homebrew/opt/ruby/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/nivupai/nivupai.github.io/vendor/bundle/ruby/4.0.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make -j11 DESTDIR\= sitearchdir\=./.gem.20260311-59559-lvvti8 sitelibdir\=./.gem.20260311-59559-lvvti8 clean
+
+current directory: /Users/nivupai/nivupai.github.io/vendor/bundle/ruby/4.0.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make -j11 DESTDIR\= sitearchdir\=./.gem.20260311-59559-lvvti8 sitelibdir\=./.gem.20260311-59559-lvvti8
+compiling ruby_http_parser.c
+compiling ryah_http_parser.c
+warningwarning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+In file included from ruby_http_parser.c:1:
+In file included from /opt/homebrew/Cellar/ruby/4.0.1/include/ruby-4.0.0/ruby.h:38:
+In file included from /opt/homebrew/Cellar/ruby/4.0.1/include/ruby-4.0.0/ruby/ruby.h:25:
+/opt/homebrew/Cellar/ruby/4.0.1/include/ruby-4.0.0/ruby/defines.h:16:10: fatal error: 'stdio.h' file not found
+#include <stdio.h>
+         ^~~~~~~~~
+ryah_http_parser.c:22:10: fatal error: 'assert.h' file not found
+#include <assert.h>
+         ^~~~~~~~~~
+1 warning and 1 error generated.
+make: *** [ryah_http_parser.o] Error 1
+make: *** Waiting for unfinished jobs....
+1 warning and 1 error generated.
+make: *** [ruby_http_parser.o] Error 1
+
+make failed, exit code 2

@@ -1,0 +1,21 @@
+current directory: /Users/nivupai/nivupai.github.io/vendor/bundle/ruby/4.0.0/gems/racc-1.8.1/ext/racc/cparse
+/opt/homebrew/opt/ruby/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/nivupai/nivupai.github.io/vendor/bundle/ruby/4.0.0/gems/racc-1.8.1/ext/racc/cparse
+make -j11 DESTDIR\= sitearchdir\=./.gem.20260311-59559-uw4rmn sitelibdir\=./.gem.20260311-59559-uw4rmn clean
+
+current directory: /Users/nivupai/nivupai.github.io/vendor/bundle/ruby/4.0.0/gems/racc-1.8.1/ext/racc/cparse
+make -j11 DESTDIR\= sitearchdir\=./.gem.20260311-59559-uw4rmn sitelibdir\=./.gem.20260311-59559-uw4rmn
+compiling cparse.c
+warning: unknown warning option '-Wno-cast-function-type'; did you mean '-Wno-bad-function-cast'? [-Wunknown-warning-option]
+In file included from cparse.c:12:
+In file included from /opt/homebrew/Cellar/ruby/4.0.1/include/ruby-4.0.0/ruby.h:38:
+In file included from /opt/homebrew/Cellar/ruby/4.0.1/include/ruby-4.0.0/ruby/ruby.h:25:
+/opt/homebrew/Cellar/ruby/4.0.1/include/ruby-4.0.0/ruby/defines.h:16:10: fatal error: 'stdio.h' file not found
+#include <stdio.h>
+         ^~~~~~~~~
+1 warning and 1 error generated.
+make: *** [cparse.o] Error 1
+
+make failed, exit code 2
