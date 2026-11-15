@@ -4,146 +4,545 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nivedita Rethnakar</title>
+<meta name="description" content="Nivedita Rethnakar: computer science, linguistics and mathematics at UIUC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --paper:#f6eee2;
+  --ink:#2f2622;
+  --ink-soft:#5b4b43;
+  --rose:#a3405a;
+  --rose-soft:rgba(163,64,90,.35);
+  --water:#6f8fa3;
+}
+
+*{box-sizing:border-box;}
+
+html,body{margin:0;}
 
 body{
-margin:0;
-font-family:Georgia,"Times New Roman",serif;
-background:#f8f5ef;
-color:#111;
+  font-family:"EB Garamond",Georgia,"Times New Roman",serif;
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse at 12% 10%, rgba(233,170,165,.30), transparent 55%),
+    radial-gradient(ellipse at 88% 85%, rgba(140,175,190,.32), transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgba(236,206,140,.26), transparent 50%),
+    radial-gradient(ellipse at 10% 90%, rgba(160,190,160,.26), transparent 50%),
+    var(--paper);
+  background-attachment:fixed;
+  min-height:100vh;
 }
 
-.container{
-max-width:1000px;
-margin:auto;
-padding:40px 20px;
+/* soft brush dabs, painted by script */
+#wash{
+  position:fixed; inset:0; width:100%; height:100%;
+  z-index:0; pointer-events:none;
+  filter:blur(.6px);
 }
 
-.star{
-text-align:center;
-margin-top:60px 0;
+body.intro-playing{overflow:hidden;}
+
+/* ---------- page ---------- */
+
+.page{
+  position:relative; z-index:1;
+  max-width:1000px;
+  margin:auto;
+  padding:40px 20px 30px;
 }
 
-.star img{
-width:180px;
-height:auto;
-display:block;
-margin:auto;
-cursor:pointer;
-transition:transform .2s ease;
+.lotus-slot{
+  display:block;
+  width:170px; height:170px;
+  margin:10px auto 0;
 }
-
-.star img:hover{
-transform:scale(1.08);
-}
-
-.bottom-star{
-    text-align: center;
-    margin: 60px 0;
-}
+.lotus-slot svg{width:100%; height:100%; display:block; overflow:visible;}
 
 .name{
-text-align:center;
-font-size:2.3rem;
-margin-top:20px;
-margin-bottom:50px;
-font-weight:500;
+  text-align:center;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-weight:500;
+  font-size:2.7rem;
+  letter-spacing:.01em;
+  margin:6px 0 46px;
 }
 
 .bio-section{
-display:flex;
-gap:50px;
-align-items:center;
-justify-content:center;
-flex-wrap:wrap;
-margin-bottom:50px;
+  display:flex;
+  gap:50px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:46px;
 }
 
 .bio-photo img{
-width:230px;
-height:230px;
-border-radius:50%;
-object-fit:cover;
+  width:240px; height:240px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  box-shadow:
+    0 0 0 7px rgba(255,250,242,.75),
+    0 0 0 8px rgba(163,64,90,.18),
+    0 18px 40px -18px rgba(80,50,40,.45);
 }
 
 .bio-text{
-max-width:550px;
-font-size:1.05rem;
-line-height:1.65;
+  max-width:560px;
+  font-size:1.16rem;
+  line-height:1.7;
+  color:var(--ink-soft);
 }
+.bio-text p{margin:0;}
+
+a{
+  color:var(--rose);
+  text-decoration:underline;
+  text-decoration-color:var(--rose-soft);
+  text-underline-offset:3px;
+  transition:color .2s, text-decoration-color .2s;
+}
+a:hover{color:#7d2840; text-decoration-color:currentColor;}
 
 .links{
-text-align:center;
-font-size:1.2rem;
-margin-top:30px;
+  text-align:center;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.3rem;
+  color:var(--ink-soft);
+}
+.links a{color:var(--ink); text-decoration:none; margin:0 6px;}
+.links a:hover{color:var(--rose); text-decoration:underline;}
+
+.bottom-star{text-align:center; margin:56px 0 20px;}
+.bottom-star img{width:120px; height:auto; display:inline-block; transition:transform .2s ease;}
+.bottom-star img:hover{transform:scale(1.08);}
+
+@media (max-width:600px){
+  .page{padding:24px 16px;}
+  .name{font-size:2.2rem; margin-bottom:32px;}
+  .bio-section{gap:30px;}
+  .bio-photo img{width:200px; height:200px;}
+  .bio-text{font-size:1.08rem;}
+  .links{font-size:1.15rem; line-height:1.9;}
 }
 
-.links a{
-text-decoration:none;
-color:#222;
-margin:0 6px;
-}
+/* ---------- intro ---------- */
 
-.links a:hover{
-text-decoration:underline;
+#intro{
+  position:fixed; inset:0; z-index:5;
+  pointer-events:none;
 }
-
-.bottom-star{
-text-align:center;
-margin-top: 60px;
+#intro.active{pointer-events:auto; cursor:pointer;}
+#intro .stage{
+  position:absolute;
+  left:50%; top:50%;
+  width:min(84vmin,560px); height:min(84vmin,560px);
+  transform-origin:center center;
 }
+#intro .stage svg{width:100%; height:100%; display:block; overflow:visible;}
+#ripples{position:absolute; inset:0; width:100%; height:100%;}
 
+.page.hidden-by-intro{clip-path:circle(0px at 50% 50%);}
+
+.hint{
+  position:absolute; left:0; right:0; bottom:28px;
+  text-align:center;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-style:italic;
+  font-size:1.05rem;
+  color:rgba(91,75,67,.65);
+  opacity:0; transition:opacity 1s ease;
+}
+.hint.show{opacity:1;}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<canvas id="wash" aria-hidden="true"></canvas>
 
-<div class="star">
-<a href="index.html">
-<img src="images/alumstarclear.png" alt="Home">
-</a>
+<!-- Opening animation: Bharatanatyam hands open into a lotus, which becomes a beaded lotus,
+     then shrinks into the header while the page ripples open. Click, tap, scroll or press a key
+     to speed it up. Skipped for visitors who prefer reduced motion. -->
+<div id="intro" aria-hidden="true">
+  <svg id="ripples"></svg>
+  <div class="stage" id="stage"></div>
+  <div class="hint" id="hint">click or scroll to hurry the lotus along</div>
 </div>
 
-<div class="name">
-Nivedita Rethnakar
-</div>
+<main class="page" id="page">
 
-<div class="bio-section">
+  <a class="lotus-slot" id="lotus-slot" href="/" aria-label="Home"></a>
 
-<div class="bio-photo">
-<img src="/images/profile2.png">
-</div>
+  <h1 class="name">Nivedita Rethnakar</h1>
 
-<div class="bio-text">
-<p>
-I'm a Computer Science, Linguistics, and Mathematics major at the University of Illinois at Urbana-Champaign. This summer I interned with Johnson & Johnson’s CPP group under the Janssen Innovative Medicine sector in San Diego. Currently I am an undergraduate researcher in the HDCL Group working on RADWear and Wear Study projects designing models that use wearable sensors to detect stress and anxiety. I also serve as a copy-editor for the ILSURJ. My interests lie at the intersection of generative models in computational neuroscience and natural language understanding. Some of my passions include Susan Sontag, <a href="dance.html">Bharatanatyam</a>, my cats, and bodies of water.
-</p>
-</div>
+  <div class="bio-section">
 
-</div>
+    <div class="bio-photo">
+      <img src="/images/profile2-600.jpg" alt="Nivedita Rethnakar" width="240" height="240">
+    </div>
 
-<div class="links">
+    <div class="bio-text">
+      <p>
+        I'm a Computer Science, Linguistics, and Mathematics major at the University of Illinois at Urbana-Champaign. This summer I interned with Johnson &amp; Johnson’s CPP group under the Janssen Innovative Medicine sector in San Diego. Currently I am an undergraduate researcher in the HDCL Group working on RADWear and Wear Study projects designing models that use wearable sensors to detect stress and anxiety. I also serve as a copy-editor for the ILSURJ. My interests lie at the intersection of <a href="/projects/">generative models in computational neuroscience and natural language understanding</a>. Some of my passions include Susan Sontag<!-- TODO: link to germinating site -->, <a href="/dance.html">Bharatanatyam</a>, <a href="/malar/">beadwork</a>, my cats, and bodies of water.
+      </p>
+    </div>
 
+  </div>
+
+  <div class="links">
     <a href="mailto:niveditareth@gmail.com">Email</a> /
     <a href="/files/your-cv.pdf">CV</a> /
     <a href="https://www.researchgate.net/profile/Nivedita-Rethnakar" target="_blank" rel="noopener">Scholar</a> /
-    <a href="https://github.com/nivupai" target="_blank" rel="noopener">Github</a> / 
-    <a href="https://www.linkedin.com/in/nreth/" target="_blank" rel="noopener">LinkedIn</a> / 
+    <a href="https://github.com/nivupai" target="_blank" rel="noopener">Github</a> /
+    <a href="https://www.linkedin.com/in/nreth/" target="_blank" rel="noopener">LinkedIn</a> /
     <a href="https://www.youtube.com/@nivupai" target="_blank" rel="noopener">Youtube</a>
+  </div>
 
-</div>
+  <div class="bottom-star">
+    <a href="/" aria-label="Home"><img src="/images/alumstarclear.png" alt=""></a>
+  </div>
 
+</main>
 
-<div class="bottom-star">
-<a href="index.html">
-<img src="images/alumstarclear.png" alt="Home">
-</a>
-</div>
+<script>
+(function(){
+"use strict";
 
-</div>
+/* ================= impressionist wash ================= */
+var wash = document.getElementById('wash');
+function paintWash(){
+  var dpr = Math.min(window.devicePixelRatio||1, 2);
+  var w = window.innerWidth, h = window.innerHeight;
+  wash.width = w*dpr; wash.height = h*dpr;
+  var c = wash.getContext('2d');
+  c.setTransform(dpr,0,0,dpr,0,0);
+  c.clearRect(0,0,w,h);
+  var palette = ['#9fb8ad','#b7cdbb','#e3aea6','#efcf98','#9fb6cc','#d49fb0','#c9b6d6','#f0dcc0'];
+  var seed = 7;
+  function rnd(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }
+  var n = Math.round(w*h/700);
+  for(var i=0;i<n;i++){
+    var x = rnd()*w, y = rnd()*h;
+    // keep the middle (where text sits) quieter
+    var dx = (x-w/2)/(w/2), dy = (y-h/2)/(h/2);
+    var edge = Math.min(1, Math.sqrt(dx*dx+dy*dy));
+    var a = (0.05 + rnd()*0.10) * (0.25 + 0.75*edge);
+    c.save();
+    c.translate(x,y);
+    c.rotate(-0.5 + rnd()*0.5 + (rnd()<0.5?0:Math.PI/2)*0.3);
+    c.globalAlpha = a;
+    c.fillStyle = palette[Math.floor(rnd()*palette.length)];
+    c.beginPath();
+    c.ellipse(0,0, 8+rnd()*22, 2.5+rnd()*5, 0, 0, Math.PI*2);
+    c.fill();
+    c.restore();
+  }
+}
+paintWash();
+var washTimer;
+window.addEventListener('resize', function(){ clearTimeout(washTimer); washTimer = setTimeout(paintWash, 150); });
+
+/* ================= lotus scene ================= */
+var NS = 'http://www.w3.org/2000/svg';
+function el(name, attrs, parent){
+  var e = document.createElementNS(NS, name);
+  for(var k in attrs) e.setAttribute(k, attrs[k]);
+  if(parent) parent.appendChild(e);
+  return e;
+}
+function lerp(a,b,t){ return a+(b-a)*t; }
+function clamp01(t){ return t<0?0:t>1?1:t; }
+function ease(t){ t=clamp01(t); return t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
+
+var svg = el('svg', {viewBox:'-170 -170 340 340', role:'img', 'aria-label':'Beaded lotus'});
+var defs = el('defs', {}, svg);
+defs.innerHTML =
+  '<linearGradient id="gSkin" x1="0" y1="1" x2="0" y2="0">' +
+    '<stop offset="0" stop-color="#b9805a"/><stop offset=".84" stop-color="#cf9a72"/>' +
+    '<stop offset=".88" stop-color="#b43a30"/><stop offset="1" stop-color="#9e2a24"/></linearGradient>' +
+  '<linearGradient id="gPalm" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0" stop-color="#cf9a72"/><stop offset=".5" stop-color="#bf875f"/>' +
+    '<stop offset="1" stop-color="#b9805a" stop-opacity="0"/></linearGradient>' +
+  '<linearGradient id="gPetal" x1="0" y1="1" x2="0" y2="0">' +
+    '<stop offset="0" stop-color="#fbe9dc"/><stop offset=".45" stop-color="#f4bfc4"/>' +
+    '<stop offset="1" stop-color="#e2809a"/></linearGradient>' +
+  '<linearGradient id="gPetalIn" x1="0" y1="1" x2="0" y2="0">' +
+    '<stop offset="0" stop-color="#f9dccf"/><stop offset=".5" stop-color="#eea3b2"/>' +
+    '<stop offset="1" stop-color="#cf5f80"/></linearGradient>' +
+  '<radialGradient id="bRose" cx=".35" cy=".32" r=".75">' +
+    '<stop offset="0" stop-color="#fff"/><stop offset=".25" stop-color="#ec93a8"/><stop offset="1" stop-color="#9c3552"/></radialGradient>' +
+  '<radialGradient id="bPearl" cx=".35" cy=".32" r=".75">' +
+    '<stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#fbf3e6"/><stop offset="1" stop-color="#c9b393"/></radialGradient>' +
+  '<radialGradient id="bGold" cx=".35" cy=".32" r=".75">' +
+    '<stop offset="0" stop-color="#fff6d8"/><stop offset=".35" stop-color="#e5bb5c"/><stop offset="1" stop-color="#8f6420"/></radialGradient>' +
+  '<radialGradient id="bLeaf" cx=".35" cy=".32" r=".75">' +
+    '<stop offset="0" stop-color="#f2fff4"/><stop offset=".35" stop-color="#8fb39a"/><stop offset="1" stop-color="#3f6b55"/></radialGradient>' +
+  '<filter id="paint" x="-20%" y="-20%" width="140%" height="140%">' +
+    '<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>' +
+    '<feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>' +
+    '<feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="1" seed="9" result="g"/>' +
+    '<feColorMatrix in="g" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -0.9 1.05" result="g2"/>' +
+    '<feComposite in="d" in2="g2" operator="arithmetic" k1="0.35" k2="0.7" k3="0" k4="0"/>' +
+  '</filter>';
+
+var world = el('g', {}, svg);
+var painted = el('g', {filter:'url(#paint)'}, world);
+var palmLayer = el('g', {}, painted);
+var fingerLayer = el('g', {}, painted);
+var innerLayer = el('g', {}, painted);
+var beadLayer = el('g', {}, world);
+
+/* petal / finger outline, base at (0,0), pointing up. k: 0 = finger, 1 = petal */
+function shape(L, W, k){
+  var b = lerp(1, .12, k);
+  var c1x = lerp(1, 1.1, k), c1y = lerp(.3, .2, k);
+  var c2x = lerp(1, .75, k), c2y = lerp(1.13, .75, k);
+  return 'M'+(-b*W)+',0 L'+(b*W)+',0 C'+(W*c1x)+','+(-L*c1y)+' '+(W*c2x)+','+(-L*c2y)+' 0,'+(-L)+
+         ' C'+(-W*c2x)+','+(-L*c2y)+' '+(-W*c1x)+','+(-L*c1y)+' '+(-b*W)+',0 Z';
+}
+function palmPath(s, sp){
+  var lx = s*(19+sp*15), ox = s*(24+sp*12);
+  return 'M'+(s*-1)+',170 C'+(s*-1)+',120 '+(s*-1)+',60 '+(s*-1)+',-28 Q'+(s*12)+',-38 '+lx+',-18 '+
+         'C'+ox+',0 '+(s*(28+sp*4))+',40 '+(s*30)+',80 C'+(s*32)+',110 '+(s*34)+',140 '+(s*36)+',170 Z';
+}
+
+/* Ten fingers (j: 0 thumb .. 4 little; s: -1 left, +1 right) that become the ten outer petals. */
+var FL0 = [48,70,78,72,60], FL1 = [52,80,88,82,70];
+var PA = [82,8,24,42,62], PL = [70,118,112,102,88], PW = [26,30,32,32,30];
+var fingers = [];
+[-1,1].forEach(function(s){
+  for(var j=0;j<5;j++){
+    var K0, K1, K2;
+    if(j===0){
+      K0 = {x:s*18, y:-4, a:-s*4,  L:FL0[0], W:10};
+      K1 = {x:s*30, y:4,  a:s*80,  L:FL1[0], W:10.5};
+    } else {
+      K0 = {x:s*(5+(j-1)*4.5), y:-30+(j-1)*4, a:-s*(6+(j-1)*2), L:FL0[j], W:8.5};
+      K1 = {x:s*(9+(j-1)*7), y:-31+(j-1)*5, a:s*(8+(j-1)*16),  L:FL1[j], W:9};
+    }
+    K2 = {x:s*4, y:20, a:s*PA[j], L:PL[j], W:PW[j]};
+    var g = el('g', {}, fingerLayer);
+    var pf = el('path', {fill:'url(#gSkin)'}, g);
+    var pp = el('path', {fill:'url(#gPetal)', stroke:'rgba(190,90,115,.35)', 'stroke-width':'.8', opacity:0}, g);
+    fingers.push({s:s, j:j, K:[K0,K1,K2], g:g, pf:pf, pp:pp});
+  }
+});
+/* draw outermost petals first so inner ones overlap them in the lotus */
+fingers.sort(function(a,b){ return PA[b.j]-PA[a.j]; });
+fingers.forEach(function(f){ fingerLayer.appendChild(f.g); });
+/* thumbs should sit over the palm/fingers while they are hands: handled by palm layer below */
+
+var palms = [-1,1].map(function(s){
+  var g = el('g', {}, palmLayer);
+  var p = el('path', {fill:'url(#gPalm)'}, g);
+  var dot = el('circle', {cx:s*16, cy:18, r:6.5, fill:'#b43a30', opacity:0}, g);
+  return {s:s, g:g, p:p, dot:dot};
+});
+
+/* three inner petals that bloom in the middle */
+var inner = [-15,0,15].map(function(a, i){
+  var g = el('g', {}, innerLayer);
+  var p = el('path', {fill:'url(#gPetalIn)', stroke:'rgba(170,70,100,.35)', 'stroke-width':'.8'}, g);
+  return {a:a, L: i===1 ? 124 : 116, W: i===1 ? 30 : 28, g:g, p:p};
+});
+
+function setPetal(g, path, x, y, a, L, W, k){
+  g.setAttribute('transform', 'translate('+x.toFixed(2)+','+y.toFixed(2)+') rotate('+a.toFixed(2)+')');
+  path.setAttribute('d', shape(L, W, k));
+}
+
+/* ---- beads: computed from the final petal outlines ---- */
+var beads = [];
+function addBeadsAlong(pathD, x, y, a, spacing, r, fill, order, skipBase){
+  var tmp = el('path', {d:pathD});
+  svg.appendChild(tmp);
+  var len = tmp.getTotalLength();
+  var rad = a*Math.PI/180, ca = Math.cos(rad), sa = Math.sin(rad);
+  var n = Math.floor(len/spacing);
+  for(var i=0;i<n;i++){
+    var p = tmp.getPointAtLength(i*len/n);
+    if(skipBase && p.y > -4) continue;
+    var gx = x + p.x*ca - p.y*sa, gy = y + p.x*sa + p.y*ca;
+    // reveal from the base of the petal toward the tip
+    var along = Math.min(1, -p.y/130);
+    beads.push({x:gx, y:gy, r:r, fill:fill, order: order + along*0.55});
+  }
+  svg.removeChild(tmp);
+}
+function buildBeads(){
+  fingers.forEach(function(f){
+    var K = f.K[2], outer = (f.j===0 || f.j===4);
+    addBeadsAlong(shape(K.L, K.W, 1), K.x, K.y, K.a, 6.6, 2.5, outer ? 'url(#bPearl)' : 'url(#bRose)', Math.abs(PA[f.j])/82*0.25, true);
+    addBeadsAlong('M0,-6 L0,'+(-K.L+10), K.x, K.y, K.a, 9, 1.7, 'url(#bPearl)', 0.3, false);
+  });
+  inner.forEach(function(p){
+    addBeadsAlong(shape(p.L, p.W, 1), 0, 20, p.a, 6.4, 2.6, 'url(#bRose)', 0.1, true);
+    addBeadsAlong('M0,-6 L0,'+(-p.L+10), 0, 20, p.a, 9, 1.8, 'url(#bGold)', 0.35, false);
+  });
+  // a little gold clasp at the base, and two leaves of green beads
+  for(var i=0;i<9;i++){
+    var t = i/8, ang = Math.PI*(1.1 + t*0.8);
+    beads.push({x:Math.cos(ang)*14, y:26+Math.sin(ang)*-4, r:3.2, fill:'url(#bGold)', order:0});
+  }
+  [-1,1].forEach(function(s){
+    for(var i=0;i<11;i++){
+      var t = i/10;
+      beads.push({x:s*(18+t*95), y:34 - Math.sin(t*Math.PI)*12 + t*6, r:2.6, fill:'url(#bLeaf)', order:0.05+t*0.4});
+      if(i>0 && i<10) beads.push({x:s*(18+t*95), y:34 + Math.sin(t*Math.PI)*5 + t*6, r:2.2, fill:'url(#bLeaf)', order:0.1+t*0.4});
+    }
+  });
+  beads.sort(function(a,b){ return a.order-b.order; });
+  beads.forEach(function(b){
+    b.node = el('circle', {cx:b.x.toFixed(2), cy:b.y.toFixed(2), r:0, fill:b.fill}, beadLayer);
+  });
+}
+
+/* ================= timeline ================= */
+var T = {
+  fadeIn:[0,.7], open:[.6,2.2], bloom:[2.6,4.6], bead:[4.5,6.4], expand:[6.9,8.3]
+};
+function seg(t, s){ return clamp01((t-s[0])/(s[1]-s[0])); }
+
+function render(t){
+  var fi = ease(seg(t, T.fadeIn));
+  var o = ease(seg(t, T.open));
+  var bl = ease(seg(t, T.bloom));
+  var bd = seg(t, T.bead);
+
+  // centre the hands, then the lotus
+  var gy = lerp(lerp(-30, -25, o), 40, bl);
+  world.setAttribute('transform', 'translate(0,'+gy.toFixed(2)+')');
+  painted.setAttribute('opacity', fi.toFixed(3));
+
+  palms.forEach(function(p){
+    p.p.setAttribute('d', palmPath(p.s, o));
+    p.g.setAttribute('opacity', (1-clamp01(bl*1.6)).toFixed(3));
+    p.g.setAttribute('transform', 'translate(0,'+(bl*30).toFixed(2)+')');
+    p.dot.setAttribute('opacity', (o*0.85).toFixed(3));
+  });
+
+  var fillFade = lerp(1, .42, ease(bd));
+  fingers.forEach(function(f){
+    var A = f.K[0], B = f.K[1], C = f.K[2];
+    var x = lerp(lerp(A.x,B.x,o), C.x, bl), y = lerp(lerp(A.y,B.y,o), C.y, bl);
+    var a = lerp(lerp(A.a,B.a,o), C.a, bl);
+    var L = lerp(lerp(A.L,B.L,o), C.L, bl), W = lerp(lerp(A.W,B.W,o), C.W, bl);
+    setPetal(f.g, f.pf, x, y, a, L, W, bl);
+    f.pp.setAttribute('d', f.pf.getAttribute('d'));
+    var colour = clamp01((bl-.15)/.6);
+    f.pf.setAttribute('opacity', (1-colour).toFixed(3));
+    f.pp.setAttribute('opacity', (colour*fillFade).toFixed(3));
+  });
+
+  var ib = ease(seg(t, [T.bloom[0]+.9, T.bloom[1]+.3]));
+  inner.forEach(function(p){
+    setPetal(p.g, p.p, 0, 20, p.a*ib, lerp(20, p.L, ib), lerp(6, p.W, ib), 1);
+    p.g.setAttribute('opacity', (Math.min(1, ib*2)*fillFade).toFixed(3));
+  });
+
+  for(var i=0;i<beads.length;i++){
+    var b = beads[i];
+    var start = b.order/1.0*0.75;           // stagger across the bead window
+    var k = clamp01((bd - start)/0.12);
+    var r = k===0 ? 0 : b.r*(k<1 ? 0.3 + 0.9*Math.sin(k*Math.PI*0.6)/Math.sin(Math.PI*0.6) : 1);
+    if(b.lastR !== r){ b.node.setAttribute('r', r.toFixed(2)); b.lastR = r; }
+  }
+}
+
+/* ================= intro orchestration ================= */
+var intro = document.getElementById('intro');
+var stage = document.getElementById('stage');
+var page = document.getElementById('page');
+var slot = document.getElementById('lotus-slot');
+var ripples = document.getElementById('ripples');
+var hint = document.getElementById('hint');
+
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function settle(){
+  slot.appendChild(svg);
+  intro.parentNode && intro.parentNode.removeChild(intro);
+  page.classList.remove('hidden-by-intro');
+  page.style.clipPath = '';
+  document.body.classList.remove('intro-playing');
+}
+
+stage.appendChild(svg);
+buildBeads();
+
+if(reduce){
+  render(T.bead[1] + .1);
+  settle();
+  return;
+}
+
+document.body.classList.add('intro-playing');
+page.classList.add('hidden-by-intro');
+intro.classList.add('active');
+window.scrollTo(0,0);
+
+var speed = 1, nudges = 0;
+function hurry(e){
+  if(e && e.type === 'keydown' && (e.metaKey || e.ctrlKey || e.altKey)) return;
+  nudges++;
+  speed = nudges === 1 ? 3.5 : 7;
+  hint.classList.remove('show');
+}
+var hurryEvents = ['pointerdown','wheel','touchmove','keydown'];
+hurryEvents.forEach(function(ev){ window.addEventListener(ev, hurry, {passive:true}); });
+var hintTimer = setTimeout(function(){ hint.classList.add('show'); }, 1800);
+
+var ringNodes = [0,1,2].map(function(){
+  return el('ellipse', {fill:'none', stroke:'rgba(111,143,163,.55)', 'stroke-width':'1.5', opacity:0}, ripples);
+});
+
+var t = 0, last = null, done = false;
+function frame(now){
+  if(last === null) last = now;
+  var dt = Math.min(.05, (now-last)/1000); last = now;
+  t += dt*speed;
+  render(Math.min(t, T.bead[1] + .1));
+
+  var vw = window.innerWidth, vh = window.innerHeight;
+  var size = stage.offsetWidth;
+  var e = ease(seg(t, T.expand));
+  var sr = slot.getBoundingClientRect();
+  var fromX = vw/2, fromY = vh/2;
+  var toX = sr.left + sr.width/2, toY = sr.top + sr.height/2;
+  var cx = lerp(fromX, toX, e), cy = lerp(fromY, toY, e);
+  var sc = lerp(1, sr.width/size, e);
+  stage.style.transform = 'translate('+(cx - vw/2 - size/2).toFixed(2)+'px,'+(cy - vh/2 - size/2).toFixed(2)+'px) scale('+sc.toFixed(4)+')';
+
+  // water ripples spread from the lotus and open the page
+  var rp = seg(t, [T.expand[0]-.2, T.expand[1]+.2]);
+  var maxR = Math.hypot(vw, vh);
+  ringNodes.forEach(function(n, i){
+    var k = clamp01(rp*1.25 - i*.12);
+    n.setAttribute('cx', fromX); n.setAttribute('cy', fromY + size*0.12);
+    n.setAttribute('rx', (k*maxR*.9).toFixed(1)); n.setAttribute('ry', (k*maxR*.9*.62).toFixed(1));
+    n.setAttribute('opacity', (k>0 ? (1-k)*.9 : 0).toFixed(3));
+  });
+  var reveal = Math.pow(ease(rp), 1.3) * maxR;
+  page.style.clipPath = 'circle('+reveal.toFixed(1)+'px at '+fromX+'px '+(fromY + size*0.12)+'px)';
+
+  if(t >= T.expand[1] + .25){
+    done = true;
+    clearTimeout(hintTimer);
+    hurryEvents.forEach(function(ev){ window.removeEventListener(ev, hurry); });
+    stage.style.transform = '';
+    settle();
+    return;
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+})();
+</script>
 
 </body>
 </html>
