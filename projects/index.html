@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects | Nivedita Rethnakar</title>
+<meta name="description" content="Projects by Nivedita Rethnakar: Soma, BioResearch Agent, Aksharam and Natya Archive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/warm.css">
+<style>
+.project{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:36px;
+  align-items:center;
+  padding:40px 0;
+  border-top:1px solid var(--line);
+}
+.project:nth-of-type(even) .media{order:2;}
+.media{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  background:var(--card);
+  box-shadow:0 0 0 1px var(--line), 0 22px 44px -26px rgba(80,50,40,.55);
+  aspect-ratio:16/10;
+}
+.media img, .media svg, .media iframe{display:block; width:100%; height:100%; border:0;}
+.media img{object-fit:cover;}
+.media.live{aspect-ratio:auto; height:min(76vh,640px);}
+
+.kicker{
+  font-family:var(--serif-display);
+  font-style:italic;
+  font-size:1.05rem;
+  color:var(--rose);
+  margin:0 0 2px;
+}
+.project h2{
+  font-family:var(--serif-display);
+  font-weight:600;
+  font-size:2rem;
+  line-height:1.1;
+  margin:0 0 12px;
+}
+.project h2 .script{font-weight:500; color:var(--ink-faint); font-size:1.5rem; margin-left:6px;}
+.project p{font-size:1.1rem; line-height:1.65; color:var(--ink-soft); margin:0 0 14px;}
+.tags{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 18px; padding:0; list-style:none;}
+.tags li{
+  font-size:.92rem;
+  padding:2px 10px;
+  border-radius:999px;
+  background:rgba(255,251,245,.8);
+  border:1px solid var(--line);
+  color:var(--ink-soft);
+}
+.actions{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center;}
+.btn{
+  font:inherit;
+  font-size:1.02rem;
+  padding:7px 16px;
+  border-radius:999px;
+  border:1px solid var(--rose);
+  background:var(--rose);
+  color:#fff8f3;
+  cursor:pointer;
+  text-decoration:none;
+  transition:background .2s, border-color .2s;
+}
+.btn:hover{background:var(--rose-deep); border-color:var(--rose-deep); color:#fff8f3;}
+
+.diagram text{font-family:"EB Garamond",Georgia,serif; fill:#3d302b;}
+
+@media (max-width:760px){
+  .project{grid-template-columns:1fr; gap:20px; padding:30px 0;}
+  .project:nth-of-type(even) .media{order:0;}
+  .media.live{height:70vh;}
+  .project h2{font-size:1.75rem;}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="wash" aria-hidden="true"></canvas>
+
+<main class="page">
+
+  <div class="star small">
+    <a href="/" aria-label="Home"><img src="/images/alumstarclear.png" alt=""></a>
+  </div>
+
+  <h1 class="page-title">Projects</h1>
+  <p class="page-lead">My interests lie at the intersection of generative models in computational neuroscience and natural language understanding. These are the things I've built along the way, from brain signals to scripts to the hand gestures of dance.</p>
+
+  <!-- Soma -->
+  <section class="project" id="soma">
+    <div class="media">
+      <img src="/images/projects/soma.jpg" alt="Soma Explorer overview screen, showing EEG, MRI, source model and fMRI laboratories" loading="lazy" width="960" height="600">
+    </div>
+    <div>
+      <p class="kicker">Computational neuroscience</p>
+      <h2>Soma</h2>
+      <p>Transparent numerical foundations for computational neuroscience. Soma takes EEG from raw recordings to spectra, motor-imagery activity, decoding, and source models built on structural MRI, and records every result with the provenance needed to reproduce it.</p>
+      <p>It ships as a scientific Python SDK with executable examples and a local Explorer app for looking at signals, anatomy and models side by side.</p>
+      <ul class="tags"><li>Python</li><li>MNE</li><li>NumPy &amp; SciPy</li><li>EEG</li><li>MRI</li><li>FastAPI</li></ul>
+      <div class="actions">
+        <a class="btn" href="https://github.com/nivupai/soma" target="_blank" rel="noopener">Code on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research agent -->
+  <section class="project" id="research-agent">
+    <div class="media">
+      <svg class="diagram" viewBox="0 0 600 375" role="img" aria-label="How the agent answers: a planner sends tasks to literature, chemistry and analysis specialists, a synthesizer writes a cited answer, and a verifier checks every claim">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a3405a"/></marker>
+        </defs>
+        <rect width="600" height="375" fill="#fbf4ea"/>
+        <g fill="none" stroke="#a3405a" stroke-width="1.6" marker-end="url(#ah)">
+          <path d="M108,187 L138,187"/>
+          <path d="M232,170 C255,150 255,105 282,100"/>
+          <path d="M232,187 L282,187"/>
+          <path d="M232,204 C255,224 255,270 282,275"/>
+          <path d="M390,100 C412,105 410,170 432,180"/>
+          <path d="M390,187 L432,187"/>
+          <path d="M390,275 C412,270 410,205 432,194"/>
+          <path d="M515,212 L515,262"/>
+        </g>
+        <g stroke="#c98a98" stroke-width="1">
+          <rect x="20" y="164" width="88" height="46" rx="23" fill="#f6dce0"/>
+          <rect x="140" y="164" width="92" height="46" rx="10" fill="#fff"/>
+          <rect x="284" y="78" width="106" height="44" rx="10" fill="#fff"/>
+          <rect x="284" y="165" width="106" height="44" rx="10" fill="#fff"/>
+          <rect x="284" y="253" width="106" height="44" rx="10" fill="#fff"/>
+          <rect x="434" y="164" width="150" height="46" rx="10" fill="#fff"/>
+          <rect x="434" y="264" width="150" height="56" rx="10" fill="#e9f0e6" stroke="#8fae96"/>
+        </g>
+        <g font-size="16" text-anchor="middle">
+          <text x="64" y="192">Question</text>
+          <text x="186" y="192">Planner</text>
+          <text x="337" y="105">Literature</text>
+          <text x="337" y="192">Chemistry</text>
+          <text x="337" y="280">Analysis</text>
+          <text x="509" y="192">Synthesizer</text>
+          <text x="509" y="288">Verifier checks</text>
+          <text x="509" y="308">every claim</text>
+        </g>
+        <g font-size="12.5" text-anchor="middle" fill="#7a6a62">
+          <text x="337" y="62">PubMed · Europe PMC · 11.5k abstracts</text>
+          <text x="337" y="234">RDKit · PubChem</text>
+          <text x="337" y="320">Python sandbox · Neo4j graph</text>
+          <text x="509" y="345">NLI · LoRA Qwen3-1.7B · Gemini</text>
+        </g>
+        <text x="300" y="34" font-size="19" text-anchor="middle" font-style="italic" fill="#a3405a">a cited answer, checked claim by claim</text>
+      </svg>
+    </div>
+    <div>
+      <p class="kicker">Language models &amp; biomedicine</p>
+      <h2>BioResearch Agent</h2>
+      <p>A multi-agent research assistant for drug-repurposing questions, such as the role of MGMT in temozolomide resistance in glioblastoma. A planner splits the question between literature, chemistry and analysis specialists, which work through five MCP servers. A verifier then checks every claim in the answer against the passage it cites, and removes or flags what isn't supported.</p>
+      <p>It runs on a free stack and is served as an async API with a semantic cache, autoscaled workers, tracing and a repeated-run evaluation suite with confidence intervals.</p>
+      <ul class="tags"><li>LangGraph</li><li>MCP</li><li>Hybrid retrieval</li><li>Neo4j</li><li>FastAPI</li><li>Kubernetes</li></ul>
+      <div class="actions">
+        <a class="btn" href="https://github.com/nivupai/research-agent" target="_blank" rel="noopener">Code on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aksharam -->
+  <section class="project" id="aksharam">
+    <div class="media" data-live="/aksharam/" data-title="Aksharam, live">
+      <img src="/images/projects/aksharam.jpg" alt="Aksharam overview screen with daily goal, cards due and collections" loading="lazy" width="960" height="600">
+    </div>
+    <div>
+      <p class="kicker">Language</p>
+      <h2>Aksharam <span class="script" lang="ml">അക്ഷരം</span></h2>
+      <p>An app for English speakers learning to read the Malayalam script, a few minutes a day. It has flashcards across six collections, spaced review, short lessons, tests, and all 109 letters with pronunciation notes and sources.</p>
+      <p>It's a fully static site with no account or backend, and your progress stays in your browser.</p>
+      <ul class="tags"><li>Next.js</li><li>React</li><li>TypeScript</li><li>Tailwind CSS</li></ul>
+      <div class="actions">
+        <button class="btn try" type="button">Try it here</button>
+        <a href="/aksharam/" target="_blank" rel="noopener">Open full screen</a>
+        <a href="https://github.com/nivupai/aksharam" target="_blank" rel="noopener">Code</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mudra / Natya Archive -->
+  <section class="project" id="mudra">
+    <div class="media" data-live="/mudra/" data-title="Natya Archive, live" data-allow="camera">
+      <img src="/images/projects/mudra.jpg" alt="Natya Archive home: learn the mudras of Bharatanatyam" loading="lazy" width="960" height="600">
+    </div>
+    <div>
+      <p class="kicker">Bharatanatyam &amp; machine learning</p>
+      <h2>Natya Archive</h2>
+      <p>An interactive archive of the 50 hastas, the hand gestures of Bharatanatyam, with flashcards and quizzes. Hold a mudra up to your webcam and a small model trained on hand landmarks guesses which one it is, entirely in your browser.</p>
+      <p>It also has full-text search over the Nāṭyaśāstra that returns the original passages, not a generated answer.</p>
+      <ul class="tags"><li>React</li><li>Vite</li><li>MediaPipe</li><li>MLP classifier</li><li>MiniSearch</li></ul>
+      <div class="actions">
+        <button class="btn try" type="button">Try it here</button>
+        <a href="/mudra/" target="_blank" rel="noopener">Open full screen</a>
+        <a href="https://github.com/nivupai/mudra" target="_blank" rel="noopener">Code</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="star bottom">
+    <a href="/" aria-label="Home"><img src="/images/alumstarclear.png" alt=""></a>
+  </div>
+
+</main>
+
+<script src="/assets/js/wash.js"></script>
+<script>
+// "Try it here" swaps the screenshot for the live app, embedded in the page.
+document.querySelectorAll('.project .try').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var section = btn.closest('.project');
+    var media = section.querySelector('.media');
+    if(media.classList.contains('live')) return;
+    var frame = document.createElement('iframe');
+    frame.src = media.getAttribute('data-live');
+    frame.title = media.getAttribute('data-title');
+    frame.loading = 'lazy';
+    if(media.getAttribute('data-allow')) frame.allow = media.getAttribute('data-allow');
+    media.innerHTML = '';
+    media.appendChild(frame);
+    media.classList.add('live');
+    btn.textContent = 'Now running';
+    btn.disabled = true;
+    media.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+});
+</script>
+</body>
+</html>
