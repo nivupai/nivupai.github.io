@@ -8,70 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="/assets/css/warm.css">
 <style>
-:root{
-  --paper:#f6eee2;
-  --ink:#2f2622;
-  --ink-soft:#5b4b43;
-  --rose:#a3405a;
-  --rose-soft:rgba(163,64,90,.35);
-}
-
-*{box-sizing:border-box;}
-html,body{margin:0;}
-
-/* the same painted paper is used by the page and by the intro, so the two can swap invisibly */
-.paper{
-  background:
-    radial-gradient(ellipse at 12% 10%, rgba(233,170,165,.30), transparent 55%),
-    radial-gradient(ellipse at 88% 85%, rgba(140,175,190,.32), transparent 55%),
-    radial-gradient(ellipse at 85% 15%, rgba(236,206,140,.26), transparent 50%),
-    radial-gradient(ellipse at 10% 90%, rgba(160,190,160,.26), transparent 50%),
-    var(--paper);
-  background-attachment:fixed;
-}
-
-body{
-  font-family:"EB Garamond",Georgia,"Times New Roman",serif;
-  color:var(--ink);
-  min-height:100vh;
-}
-
-.wash{
-  position:fixed; inset:0; width:100%; height:100%;
-  pointer-events:none;
-  filter:blur(.6px);
-}
-#wash{z-index:0;}
-
-body.intro-playing{overflow:hidden;}
-
-/* ---------- page ---------- */
-
-.page{
-  position:relative; z-index:1;
-  max-width:1000px;
-  margin:auto;
-  padding:40px 20px 30px;
-}
-
-.lotus-slot{
-  display:block;
-  width:180px; height:180px;
-  margin:0 auto;
-}
-.lotus-slot canvas{width:100%; height:100%; display:block;}
-
-.name{
-  text-align:center;
-  font-family:"Cormorant Garamond",Georgia,serif;
-  font-weight:500;
-  font-size:2.7rem;
-  letter-spacing:.01em;
-  margin:0 0 46px;
-}
-
 .bio-section{
   display:flex;
   gap:50px;
@@ -80,7 +18,6 @@ body.intro-playing{overflow:hidden;}
   flex-wrap:wrap;
   margin-bottom:46px;
 }
-
 .bio-photo img{
   width:240px; height:240px;
   border-radius:50%;
@@ -91,7 +28,6 @@ body.intro-playing{overflow:hidden;}
     0 0 0 8px rgba(163,64,90,.18),
     0 18px 40px -18px rgba(80,50,40,.45);
 }
-
 .bio-text{
   max-width:560px;
   font-size:1.16rem;
@@ -99,96 +35,23 @@ body.intro-playing{overflow:hidden;}
   color:var(--ink-soft);
 }
 .bio-text p{margin:0;}
-
-a{
-  color:var(--rose);
-  text-decoration:underline;
-  text-decoration-color:var(--rose-soft);
-  text-underline-offset:3px;
-  transition:color .2s, text-decoration-color .2s;
-}
-a:hover{color:#7d2840; text-decoration-color:currentColor;}
-
-.links{
-  text-align:center;
-  font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:1.3rem;
-  color:var(--ink-soft);
-}
-.links a{color:var(--ink); text-decoration:none; margin:0 6px;}
-.links a:hover{color:var(--rose); text-decoration:underline;}
-
-.bottom-star{text-align:center; margin:56px 0 20px;}
-.bottom-star img{width:120px; height:auto; display:inline-block; transition:transform .2s ease;}
-.bottom-star img:hover{transform:scale(1.08);}
-
 @media (max-width:600px){
-  .page{padding:24px 16px;}
-  .lotus-slot{width:150px; height:150px;}
-  .name{font-size:2.2rem; margin-bottom:32px;}
   .bio-section{gap:30px;}
   .bio-photo img{width:200px; height:200px;}
   .bio-text{font-size:1.08rem;}
-  .links{font-size:1.15rem; line-height:1.9;}
 }
-
-/* ---------- intro ---------- */
-
-#intro{position:fixed; inset:0; z-index:5; cursor:pointer;}
-#intro-bg{position:absolute; inset:0;}
-#intro-bg .wash{position:absolute;}
-#ripples{position:absolute; inset:0; width:100%; height:100%; pointer-events:none;}
-
-#stage{position:absolute; transform-origin:0 0;}
-#stage > *{position:absolute;}
-#stage svg, #stage canvas{left:0; top:0; width:100%; height:100%; overflow:visible;}
-/* the video is painted on white; multiply lets the paper show through the white */
-#hands{
-  left:1%; top:-20%; width:108.8%; height:120.2%;
-  mix-blend-mode:multiply;
-  opacity:0;
-  pointer-events:none;
-}
-
-.page.hidden-by-intro{clip-path:circle(0px at 50% 50%);}
-
-.hint{
-  position:absolute; left:0; right:0; bottom:28px;
-  text-align:center;
-  font-family:"Cormorant Garamond",Georgia,serif;
-  font-style:italic;
-  font-size:1.05rem;
-  color:rgba(91,75,67,.65);
-  opacity:0; transition:opacity 1s ease;
-  pointer-events:none;
-}
-.hint.show{opacity:1;}
 </style>
 </head>
 
-<body class="paper">
+<body>
 
-<canvas id="wash" class="wash" aria-hidden="true"></canvas>
+<canvas id="wash" aria-hidden="true"></canvas>
 
-<!-- Opening: Nivedita's own hands (from video, painted, with alta on the fingertips) open
-     into a lotus, which is re-made in seed beads and settles into the header while the page
-     ripples open. Click, tap, scroll or press a key to speed it up. Reduced-motion visitors
-     see the finished page. -->
-<div id="intro" aria-hidden="true" hidden>
-  <div id="intro-bg" class="paper"><canvas class="wash"></canvas></div>
-  <svg id="ripples"></svg>
-  <div id="stage">
-    <video id="hands" muted playsinline preload="auto">
-      <source src="/images/intro/hands.mp4" type="video/mp4">
-      <source src="/images/intro/hands.webm" type="video/webm">
-    </video>
+<main class="page">
+
+  <div class="star">
+    <a href="/" aria-label="Home"><img src="/images/alumstarclear.png" alt=""></a>
   </div>
-  <div class="hint" id="hint">click or scroll to hurry the lotus along</div>
-</div>
-
-<main class="page" id="page">
-
-  <a class="lotus-slot" id="lotus-slot" href="/" aria-label="Home"></a>
 
   <h1 class="name">Nivedita Rethnakar</h1>
 
@@ -209,454 +72,19 @@ a:hover{color:#7d2840; text-decoration-color:currentColor;}
   <div class="links">
     <a href="mailto:niveditareth@gmail.com">Email</a> /
     <a href="/files/your-cv.pdf">CV</a> /
+    <a href="/projects/">Projects</a> /
     <a href="https://www.researchgate.net/profile/Nivedita-Rethnakar" target="_blank" rel="noopener">Scholar</a> /
     <a href="https://github.com/nivupai" target="_blank" rel="noopener">Github</a> /
     <a href="https://www.linkedin.com/in/nreth/" target="_blank" rel="noopener">LinkedIn</a> /
     <a href="https://www.youtube.com/@nivupai" target="_blank" rel="noopener">Youtube</a>
   </div>
 
-  <div class="bottom-star">
+  <div class="star bottom">
     <a href="/" aria-label="Home"><img src="/images/alumstarclear.png" alt=""></a>
   </div>
 
 </main>
 
-<script>
-(function(){
-"use strict";
-
-function lerp(a,b,t){ return a+(b-a)*t; }
-function clamp01(t){ return t<0?0:t>1?1:t; }
-function ease(t){ t=clamp01(t); return t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
-function easeOut(t){ t=clamp01(t); return 1-Math.pow(1-t,3); }
-function seg(t,a,b){ return clamp01((t-a)/(b-a)); }
-
-/* ================= impressionist wash (identical on page and intro) ================= */
-function paintWash(cv){
-  var dpr = Math.min(window.devicePixelRatio||1, 2);
-  var w = window.innerWidth, h = window.innerHeight;
-  cv.width = w*dpr; cv.height = h*dpr;
-  var c = cv.getContext('2d');
-  c.setTransform(dpr,0,0,dpr,0,0);
-  c.clearRect(0,0,w,h);
-  var palette = ['#9fb8ad','#b7cdbb','#e3aea6','#efcf98','#9fb6cc','#d49fb0','#c9b6d6','#f0dcc0'];
-  var seed = 7;
-  function rnd(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }
-  var n = Math.round(w*h/700);
-  for(var i=0;i<n;i++){
-    var x = rnd()*w, y = rnd()*h;
-    var dx = (x-w/2)/(w/2), dy = (y-h/2)/(h/2);
-    var edge = Math.min(1, Math.sqrt(dx*dx+dy*dy));
-    var a = (0.05 + rnd()*0.10) * (0.25 + 0.75*edge);
-    c.save();
-    c.translate(x,y);
-    c.rotate(-0.5 + rnd()*0.5 + (rnd()<0.5?0:Math.PI/2)*0.3);
-    c.globalAlpha = a;
-    c.fillStyle = palette[Math.floor(rnd()*palette.length)];
-    c.beginPath();
-    c.ellipse(0,0, 8+rnd()*22, 2.5+rnd()*5, 0, 0, Math.PI*2);
-    c.fill();
-    c.restore();
-  }
-}
-var washes = Array.prototype.slice.call(document.querySelectorAll('canvas.wash'));
-washes.forEach(paintWash);
-var washTimer;
-window.addEventListener('resize', function(){
-  clearTimeout(washTimer);
-  washTimer = setTimeout(function(){ washes.forEach(function(c){ if(c.isConnected) paintWash(c); }); }, 150);
-});
-
-/* ================= lotus geometry =================
-   Units: a 340 x 340 box centred on (0,0). Each petal is drawn in its own frame with its
-   base at (0,0) pointing up, then rotated by `a` degrees and moved to (x,y).
-   Rows are listed back to front, following the reference photo: pale yellow sepals,
-   wide outer petals, an upright back row, a cream heart, then middle and front rows. */
-
-function petalPts(L, W){
-  // ovate petal with a soft point, as cubic segments [x0,y0, c1x,c1y, c2x,c2y, x1,y1]
-  return [
-    [0,0,  W*0.95,-L*0.04,  W*1.08,-L*0.55,  W*0.38,-L*0.86],
-    [W*0.38,-L*0.86,  W*0.18,-L*0.96,  W*0.05,-L*0.985,  0,-L],
-    [0,-L,  -W*0.05,-L*0.985,  -W*0.18,-L*0.96,  -W*0.38,-L*0.86],
-    [-W*0.38,-L*0.86,  -W*1.08,-L*0.55,  -W*0.95,-L*0.04,  0,0]
-  ];
-}
-function ptsToD(p){
-  var d = 'M'+p[0][0].toFixed(2)+','+p[0][1].toFixed(2);
-  for(var i=0;i<p.length;i++){ var s=p[i]; d += ' C'+s[2].toFixed(2)+','+s[3].toFixed(2)+' '+s[4].toFixed(2)+','+s[5].toFixed(2)+' '+s[6].toFixed(2)+','+s[7].toFixed(2); }
-  return d+' Z';
-}
-function bez(s, t){
-  var u=1-t;
-  return [u*u*u*s[0]+3*u*u*t*s[2]+3*u*t*t*s[4]+t*t*t*s[6], u*u*u*s[1]+3*u*u*t*s[3]+3*u*t*t*s[5]+t*t*t*s[7]];
-}
-/* sample an outline evenly by arc length */
-function sampleOutline(p, spacing){
-  var dense=[], i, k;
-  for(i=0;i<p.length;i++) for(k=0;k<40;k++) dense.push(bez(p[i], k/40));
-  dense.push(dense[0]);
-  var out=[], total=0, lens=[];
-  for(i=1;i<dense.length;i++){ var l=Math.hypot(dense[i][0]-dense[i-1][0], dense[i][1]-dense[i-1][1]); lens.push(l); total+=l; }
-  var n = Math.max(6, Math.round(total/spacing)), step = total/n, next = 0, acc = 0;
-  for(i=1;i<dense.length && out.length<n;i++){
-    var ll = lens[i-1];
-    while(next <= acc + ll && out.length<n){
-      var f = ll ? (next-acc)/ll : 0;
-      out.push([lerp(dense[i-1][0],dense[i][0],f), lerp(dense[i-1][1],dense[i][1],f)]);
-      next += step;
-    }
-    acc += ll;
-  }
-  return out;
-}
-
-var P = [];   // petals
-function row(list, kind, order){
-  list.forEach(function(q){ P.push({x:q[0], y:q[1], a:q[2], L:q[3], W:q[4], kind:kind, order:order}); });
-}
-row([[-8,40,-140,70,30],[8,40,140,70,30],[-8,40,-112,82,36],[8,40,112,82,36]], 'sepal', .55);
-row([[-6,34,-64,118,44],[6,34,64,118,44]], 'outer', .45);
-row([[-4,0,-36,112,40],[4,0,36,112,40],[-2,-2,-17,120,42],[2,-2,17,120,42],[0,-4,0,124,42]], 'back', .12);
-row([[-3,-26,-22,66,26],[3,-26,22,66,26],[0,-30,0,72,28]], 'heart', 0);
-row([[-6,40,-80,104,42],[6,40,80,104,42]], 'outer', .4);
-row([[-4,22,-46,114,46],[4,22,46,114,46],[-3,18,-25,118,48],[3,18,25,118,48]], 'middle', .22);
-row([[-4,34,-13,118,52],[4,34,13,118,52],[0,42,0,122,62]], 'front', .32);
-
-var PAINT = {
-  sepal:  ['#efe7a6','#f3eebf','#e2d98a'],
-  outer:  ['#fbf1e0','#f6d4d4','#e9a2b2'],
-  back:   ['#fbeedd','#f2b6c2','#de6489'],
-  heart:  ['#fdf6ea','#f8e3d6','#efb4bf'],
-  middle: ['#fcefe0','#f4c0c8','#e27393'],
-  front:  ['#fdf3e6','#f6cbd0','#e37997']
-};
-var BEADS = {     // [outer row colour, body colour, inner accent]
-  sepal:  ['#7f8a2a','#b5ae3e','#d6c65a'],
-  outer:  ['#e8a3b6','#f6cdd6','#fbe4e8'],
-  back:   ['#b83a64','#d9628a','#e98aa6'],
-  heart:  ['#e7b6a8','#fbf0e4','#fff8ef'],
-  middle: ['#c94a74','#e47c9d','#f0a6bc'],
-  front:  ['#d45d84','#ef97b0','#f7c3d0']
-};
-
-/* ================= painted lotus (SVG) ================= */
-var NS = 'http://www.w3.org/2000/svg';
-function el(name, attrs, parent){
-  var e = document.createElementNS(NS, name);
-  for(var k in attrs) e.setAttribute(k, attrs[k]);
-  if(parent) parent.appendChild(e);
-  return e;
-}
-var svg = el('svg', {viewBox:'-170 -170 340 340'});
-var defs = el('defs', {}, svg);
-var gradHTML = '';
-Object.keys(PAINT).forEach(function(k){
-  var c = PAINT[k];
-  gradHTML += '<linearGradient id="g-'+k+'" x1="0" y1="1" x2="0" y2="0">' +
-    '<stop offset="0" stop-color="'+c[0]+'"/><stop offset=".55" stop-color="'+c[1]+'"/>' +
-    '<stop offset=".93" stop-color="'+c[2]+'"/><stop offset="1" stop-color="'+c[2]+'"/></linearGradient>';
-});
-defs.innerHTML = gradHTML +
-  '<filter id="paint" x="-20%" y="-20%" width="140%" height="140%">' +
-    '<feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="4" result="n"/>' +
-    '<feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>' +
-    '<feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="1" seed="9" result="g"/>' +
-    '<feColorMatrix in="g" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -0.9 1.05" result="g2"/>' +
-    '<feComposite in="d" in2="g2" operator="arithmetic" k1="0.3" k2="0.75" k3="0" k4="0"/>' +
-  '</filter>';
-var painted = el('g', {filter:'url(#paint)'}, svg);
-P.forEach(function(p){
-  p.g = el('g', {opacity:0}, painted);
-  p.path = el('path', {fill:'url(#g-'+p.kind+')', stroke:'rgba(190,95,120,.28)', 'stroke-width':'.7'}, p.g);
-  p.veins = el('path', {fill:'none', stroke: p.kind==='sepal' ? 'rgba(170,160,70,.35)' : 'rgba(205,100,135,.22)', 'stroke-width':'.6'}, p.g);
-});
-function veinD(L, W){
-  var d='';
-  [-.55,-.3,0,.3,.55].forEach(function(f){
-    d += 'M'+(f*W*.15).toFixed(1)+',-3 Q'+(f*W*.95).toFixed(1)+','+(-L*.5).toFixed(1)+' '+(f*W*.25).toFixed(1)+','+(-L*.9).toFixed(1)+' ';
-  });
-  return d;
-}
-
-/* ================= beaded lotus (canvas) ================= */
-var beadCanvas = document.createElement('canvas');
-var bctx = beadCanvas.getContext('2d');
-var R = 1.85;                  // seed bead radius, in lotus units
-var sprites = {};
-function sprite(col){
-  if(sprites[col]) return sprites[col];
-  var s = document.createElement('canvas'), n = 32; s.width = s.height = n;
-  var c = s.getContext('2d');
-  var g = c.createRadialGradient(n*.36,n*.32,n*.03, n*.5,n*.5,n*.5);
-  g.addColorStop(0,'rgba(255,255,255,.95)');
-  g.addColorStop(.22,col);
-  g.addColorStop(.78,col);
-  g.addColorStop(1,'rgba(60,20,30,.55)');
-  c.fillStyle = g; c.beginPath(); c.arc(n/2,n/2,n/2-.5,0,Math.PI*2); c.fill();
-  // a darker hole, as seed beads are seen from the side or end
-  c.fillStyle = 'rgba(70,30,40,.18)'; c.beginPath(); c.arc(n*.55,n*.56,n*.12,0,Math.PI*2); c.fill();
-  return (sprites[col] = s);
-}
-function mixHex(a, b, t){
-  var pa = parseInt(a.slice(1),16), pb = parseInt(b.slice(1),16);
-  var r = Math.round(lerp(pa>>16, pb>>16, t)), g = Math.round(lerp((pa>>8)&255, (pb>>8)&255, t)), bl = Math.round(lerp(pa&255, pb&255, t));
-  return '#'+((1<<24)|(r<<16)|(g<<8)|bl).toString(16).slice(1);
-}
-
-var beads = [], backings = [];
-var seed = 11;
-function rnd(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }
-P.forEach(function(p, pi){
-  var rad = p.a*Math.PI/180, ca = Math.cos(rad), sa = Math.sin(rad);
-  function toWorld(pt){ return [p.x + pt[0]*ca - pt[1]*sa, p.y + pt[0]*sa + pt[1]*ca]; }
-  var cols = BEADS[p.kind];
-  // French-beading style: nested loops of beads around the petal, outer row first
-  var rows = Math.max(3, Math.floor(p.W*0.92/(2*R)));
-  var pivotY = -p.L*0.42;
-  var start = beads.length;
-  for(var k=0;k<rows;k++){
-    var s = 1 - k/rows;
-    if(s < .1) break;
-    var pts = petalPts(p.L, p.W).map(function(sg){
-      return sg.map(function(v, idx){ return idx%2===0 ? v*s : pivotY + (v-pivotY)*s; });
-    });
-    var ring = sampleOutline(pts, 2*R*1.02);
-    var col = k===0 ? cols[0] : mixHex(cols[1], cols[2], k/(rows-1));
-    for(var i=0;i<ring.length;i++){
-      var w = toWorld(ring[i]);
-      // a few beads a shade off, like a real mixed tube of seed beads
-      var c = rnd()<.12 ? mixHex(col, cols[0], .35) : col;
-      beads.push({x:w[0], y:w[1], c:c, t: p.order + (k/rows)*0.35 + (i/ring.length)*0.08});
-    }
-  }
-  backings.push({p:p, pts:petalPts(p.L, p.W), from:start, to:beads.length, first:Infinity});
-});
-var maxT = 0; beads.forEach(function(b){ if(b.t>maxT) maxT=b.t; });
-beads.forEach(function(b){ b.t = b.t/maxT; });
-backings.forEach(function(b){ for(var j=b.from;j<b.to;j++) b.first = Math.min(b.first, beads[j].t); });
-
-// gold stamens on fine wire, rising from the heart
-var stamens = [];
-for(var si=0;si<9;si++){
-  var sAng = (-30 + si*7.5) * Math.PI/180, sLen = 38 + (si%3)*9;
-  stamens.push({x0:0, y0:-28, x1:Math.sin(sAng)*sLen, y1:-28-Math.cos(sAng)*sLen});
-}
-// curling green wire tendrils, as in the bouquet
-var tendrils = [
-  {x:-58, y:92, dir:-1, r:16, turns:1.7, rot:.3},
-  {x:62, y:96, dir:1, r:15, turns:1.6, rot:-.2},
-  {x:-104, y:66, dir:-1, r:11, turns:1.4, rot:.9},
-  {x:108, y:70, dir:1, r:12, turns:1.5, rot:-.8}
-];
-
-function drawBeaded(k){        // k: 0..1 share of beads placed
-  var size = beadCanvas.width;
-  bctx.setTransform(1,0,0,1,0,0);
-  bctx.clearRect(0,0,size,size);
-  var u = size/340;
-  bctx.setTransform(u,0,0,u,size/2,size/2);
-
-  // tendrils first, behind the flower
-  var tk = clamp01((k-.55)/.4);
-  if(tk>0){
-    bctx.strokeStyle = '#3f5a2c'; bctx.lineWidth = 1.3; bctx.lineCap = 'round'; bctx.lineJoin = 'round';
-    tendrils.forEach(function(t){
-      bctx.beginPath();
-      bctx.moveTo(t.x - t.dir*30, t.y - 22);
-      var steps = Math.floor(60*tk);
-      for(var s=0;s<=steps;s++){
-        var f = s/60, ang = t.rot + f*t.turns*Math.PI*2*t.dir, rr = t.r*(1-f*0.75);
-        bctx.lineTo(t.x + Math.cos(ang)*rr + f*t.dir*6, t.y + Math.sin(ang)*rr);
-      }
-      bctx.stroke();
-    });
-  }
-
-  for(var bi=0; bi<backings.length; bi++){
-    var b = backings[bi], p = b.p;
-    if(b.first <= k){
-      // soft backing so front petals read in front of back ones
-      bctx.save();
-      bctx.translate(p.x,p.y); bctx.rotate(p.a*Math.PI/180);
-      bctx.beginPath();
-      bctx.moveTo(b.pts[0][0], b.pts[0][1]);
-      b.pts.forEach(function(s){ bctx.bezierCurveTo(s[2],s[3],s[4],s[5],s[6],s[7]); });
-      bctx.fillStyle = mixHex(BEADS[p.kind][1], '#5a2a36', .25);
-      bctx.globalAlpha = .55 * clamp01((k - b.first)/0.05);
-      bctx.fill();
-      bctx.restore();
-    }
-    for(var j=b.from;j<b.to;j++){
-      var bd = beads[j];
-      if(bd.t > k) continue;
-      var r = R*(0.4+0.6*easeOut(clamp01((k - bd.t)/0.04)))*1.08;
-      bctx.drawImage(sprite(bd.c), bd.x-r, bd.y-r, r*2, r*2);
-    }
-    // stamens sit between the back row and the heart
-    if(P[bi].kind==='back' && (!P[bi+1] || P[bi+1].kind!=='back')){
-      var sk = clamp01((k-.2)/.3);
-      if(sk>0){
-        var gs = sprite('#dcae4a');
-        stamens.forEach(function(s){
-          var x1 = lerp(s.x0, s.x1, sk), y1 = lerp(s.y0, s.y1, sk);
-          bctx.strokeStyle = 'rgba(176,128,52,.9)'; bctx.lineWidth = .55;
-          bctx.beginPath(); bctx.moveTo(s.x0, s.y0); bctx.lineTo(x1, y1); bctx.stroke();
-          for(var q=0;q<3;q++) bctx.drawImage(gs, x1-1.7+(q-1)*1.4, y1-1.7-q*1.6, 3.4, 3.4);
-        });
-      }
-    }
-  }
-}
-
-/* ================= stage & timeline ================= */
-var intro = document.getElementById('intro');
-var introBg = document.getElementById('intro-bg');
-var stage = document.getElementById('stage');
-var video = document.getElementById('hands');
-var page = document.getElementById('page');
-var slot = document.getElementById('lotus-slot');
-var ripples = document.getElementById('ripples');
-var hint = document.getElementById('hint');
-stage.appendChild(svg);
-stage.appendChild(beadCanvas);
-
-var stageSize = 0;
-function layoutStage(){
-  var vw = window.innerWidth, vh = window.innerHeight;
-  stageSize = Math.min(vw*0.86, vh*0.74, 600);
-  stage.style.width = stage.style.height = stageSize+'px';
-  stage.style.left = ((vw - stageSize)/2)+'px';
-  stage.style.top = ((vh - stageSize)/2 + vh*0.03)+'px';
-}
-function sizeBeadCanvas(px){
-  var dpr = Math.min(window.devicePixelRatio||1, 2);
-  beadCanvas.width = beadCanvas.height = Math.round(px*dpr);
-}
-
-function renderLotus(bloom, beadK){
-  // bloom: 0..1 painted lotus opening; beadK: 0..1 beads placed (the paint fades as beads arrive)
-  var paintFade = 1 - easeOut(clamp01(beadK*1.3));
-  P.forEach(function(p){
-    var o = easeOut(clamp01((bloom - p.order)/0.55));
-    var L = p.L*lerp(.3,1,o), W = p.W*lerp(.2,1,o);
-    var a = p.a*lerp(.12,1,o);
-    p.g.setAttribute('transform','translate('+p.x+','+(p.y + (1-o)*14).toFixed(2)+') rotate('+a.toFixed(2)+')');
-    p.path.setAttribute('d', ptsToD(petalPts(L, W)));
-    p.veins.setAttribute('d', veinD(L, W));
-    p.g.setAttribute('opacity', (clamp01(o*2.2)*paintFade).toFixed(3));
-  });
-}
-
-var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-function settle(){
-  // hand the finished beaded lotus to the header
-  sizeBeadCanvas(slot.offsetWidth || 180);
-  drawBeaded(1);
-  slot.appendChild(beadCanvas);
-  if(intro.parentNode) intro.parentNode.removeChild(intro);
-  page.classList.remove('hidden-by-intro');
-  page.style.clipPath = '';
-  document.body.classList.remove('intro-playing');
-  washes = washes.filter(function(c){ return c.isConnected; });
-}
-
-if(reduce){ settle(); return; }
-
-intro.hidden = false;
-layoutStage();
-sizeBeadCanvas(stageSize);
-drawBeaded(0);
-renderLotus(0,0);
-document.body.classList.add('intro-playing');
-page.classList.add('hidden-by-intro');
-window.scrollTo(0,0);
-
-var speed = 1, nudges = 0, BASE_RATE = 1.25;
-function hurry(e){
-  if(e && e.type === 'keydown' && (e.metaKey || e.ctrlKey || e.altKey)) return;
-  nudges++;
-  speed = nudges === 1 ? 3 : 6;
-  try{ video.playbackRate = BASE_RATE*speed; }catch(_){}
-  hint.classList.remove('show');
-}
-var hurryEvents = ['pointerdown','wheel','touchmove','keydown'];
-hurryEvents.forEach(function(ev){ window.addEventListener(ev, hurry, {passive:true}); });
-var hintTimer = setTimeout(function(){ hint.classList.add('show'); }, 2500);
-
-var ringNodes = [0,1,2].map(function(){
-  return el('ellipse', {fill:'none', stroke:'rgba(111,143,163,.55)', 'stroke-width':'1.5', opacity:0}, ripples);
-});
-
-/* phase 1 is the video; phase 2 runs on t (seconds at 1x): bloom, beads, settle */
-var videoDone = false, videoStarted = false;
-var T = {bloom:[0,2.6], beads:[2.0,5.0], expand:[5.5,6.9]};
-var t = 0, last = null, introFade = 0;
-
-function startLotus(){ videoDone = true; }
-video.addEventListener('ended', startLotus);
-video.addEventListener('error', startLotus);
-video.addEventListener('timeupdate', function(){
-  if(video.duration && video.currentTime >= video.duration - 0.55) videoDone = true;
-});
-video.playbackRate = BASE_RATE;
-var playAttempt = video.play();
-if(playAttempt && playAttempt.catch) playAttempt.catch(function(){ startLotus(); });
-// if the video has not started after a few seconds (slow network), go straight to the lotus
-var stallTimer = setTimeout(function(){ if(!videoStarted) startLotus(); }, 3500);
-video.addEventListener('playing', function(){ videoStarted = true; clearTimeout(stallTimer); });
-
-var lastBeadK = -1;
-function frame(now){
-  if(last === null) last = now;
-  var dt = Math.min(.05, (now-last)/1000); last = now;
-
-  introFade = Math.min(1, introFade + dt*2.2);
-  if(videoDone) t += dt*speed;
-
-  var bloom = ease(seg(t, T.bloom[0], T.bloom[1]));
-  var beadK = seg(t, T.beads[0], T.beads[1]);
-  video.style.opacity = (introFade * (1 - ease(seg(t, 0.9, 2.3)))).toFixed(3);
-  renderLotus(bloom, beadK);
-  if(Math.abs(beadK - lastBeadK) > 0.0005){ drawBeaded(beadK); lastBeadK = beadK; }
-
-  var vw = window.innerWidth, vh = window.innerHeight;
-  var e = ease(seg(t, T.expand[0], T.expand[1]));
-  var sr = slot.getBoundingClientRect();
-  var sx = parseFloat(stage.style.left), sy = parseFloat(stage.style.top);
-  var fromX = sx + stageSize/2, fromY = sy + stageSize/2;
-  var toX = sr.left + sr.width/2, toY = sr.top + sr.height/2;
-  var sc = lerp(1, sr.width/stageSize, e);
-  var cx = lerp(fromX, toX, e), cy = lerp(fromY, toY, e);
-  stage.style.transform = e > 0 ? 'translate('+(cx - sc*stageSize/2 - sx).toFixed(2)+'px,'+(cy - sc*stageSize/2 - sy).toFixed(2)+'px) scale('+sc.toFixed(4)+')' : '';
-
-  // water ripples spread from the lotus and open the page
-  var rp = seg(t, T.expand[0]-.2, T.expand[1]+.2);
-  if(rp > 0 && introBg.style.display !== 'none') introBg.style.display = 'none';   // the page's paper is identical underneath
-  var maxR = Math.hypot(vw, vh);
-  var oy = fromY + stageSize*0.1;
-  ringNodes.forEach(function(n, i){
-    var k = clamp01(rp*1.25 - i*.12);
-    n.setAttribute('cx', fromX); n.setAttribute('cy', oy);
-    n.setAttribute('rx', (k*maxR*.9).toFixed(1)); n.setAttribute('ry', (k*maxR*.9*.62).toFixed(1));
-    n.setAttribute('opacity', (k>0 ? (1-k)*.9 : 0).toFixed(3));
-  });
-  page.style.clipPath = rp > 0 ? 'circle('+(Math.pow(ease(rp),1.3)*maxR).toFixed(1)+'px at '+fromX+'px '+oy+'px)' : 'circle(0px at 50% 50%)';
-
-  if(t >= T.expand[1] + .25){
-    clearTimeout(hintTimer);
-    hurryEvents.forEach(function(ev){ window.removeEventListener(ev, hurry); });
-    stage.style.transform = '';
-    settle();
-    return;
-  }
-  requestAnimationFrame(frame);
-}
-requestAnimationFrame(frame);
-
-})();
-</script>
-
+<script src="/assets/js/wash.js"></script>
 </body>
 </html>
